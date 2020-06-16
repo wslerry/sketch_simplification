@@ -1,7 +1,8 @@
 import torch
 from torchvision import transforms
 from torchvision.utils import save_image
-from torch.utils.serialization import load_lua
+#from torch.utils.serialization import load_lua
+import torchfile
 
 from PIL import Image
 import argparse
@@ -14,7 +15,8 @@ opt = parser.parse_args()
 
 use_cuda = torch.cuda.device_count() > 0
 
-cache  = load_lua( opt.model )
+cache = torchfile.load(opt.model)
+#cache  = load_lua( opt.model )
 model  = cache.model
 immean = cache.mean
 imstd  = cache.std
